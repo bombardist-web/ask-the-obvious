@@ -1,0 +1,148 @@
+exactly
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask the Obvious</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f6fc;
+  color: #172033;
+}
+header {
+  padding: 22px;
+  background: white;
+  font-size: 22px;
+  font-weight: bold;
+}
+header span { color: #5548e8; }
+main {
+  max-width: 750px;
+  margin: 75px auto;
+  padding: 20px;
+  text-align: center;
+}
+h1 { font-size: 48px; }
+.subtitle { color: #687187; font-size: 18px; }
+form {
+  display: flex;
+  gap: 8px;
+  margin: 30px auto;
+}
+input {
+  flex: 1;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+}
+button {
+  padding: 15px 20px;
+  background: #5548e8;
+  color: white;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+#answer {
+  display: none;
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  text-align: left;
+  line-height: 1.6;
+}
+.examples {
+  margin-top: 45px;
+}
+.examples button {
+  margin: 5px;
+  background: white;
+  color: #5548e8;
+  border: 1px solid #ddd;
+}
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #777;
+}
+@media(max-width:550px) {
+  form { flex-direction: column; }
+  h1 { font-size: 38px; }
+}
+</style>
+</head>
+<body>
+
+<header>Ask the <span>Obvious.</span></header>
+
+<main>
+  <h1>Curious? Just ask.</h1>
+  <p class="subtitle">
+    Quick, friendly answers to everyday questions.
+    No judgment. No question is too simple.
+  </p>
+
+  <form id="questionForm">
+    <input id="question" placeholder="Ask me anything..." required>
+    <button type="submit">Get an answer</button>
+  </form>
+
+  <div id="answer">
+    <h2>Here's your answer:</h2>
+    <p id="answerText"></p>
+  </div>
+
+  <div class="examples">
+    <h3>Try asking:</h3>
+    <button onclick="ask('Why is the sky blue?')">Why is the sky blue?</button>
+    <button onclick="ask('How does Wi-Fi work?')">How does Wi-Fi work?</button>
+    <button onclick="ask('Why do we sleep?')">Why do we sleep?</button>
+    <button onclick="ask('What is inflation?')">What is inflation?</button>
+    <button onclick="ask('Why does ice float?')">Why does ice float?</button>
+  </div>
+</main>
+
+<footer>
+  © 2026 Ask the Obvious. Keep asking!
+</footer>
+
+<script>
+const answers = [
+  ["sky", "Sunlight contains different colors. Air scatters blue light more than most other colors, making the sky appear blue."],
+  ["wifi", "Wi-Fi uses radio waves to send information between your device and a wireless router. The router connects you to the internet."],
+  ["sleep", "Sleep gives your brain and body time to recover. It helps your memory, mood, concentration, and overall health."],
+  ["inflation", "Inflation means prices are rising overall, so the same amount of money buys fewer things."],
+  ["ice", "Ice floats because water expands when it freezes. This makes ice less dense than liquid water."]
+];
+
+function ask(q) {
+  document.getElementById("question").value = q;
+  const lower = q.toLowerCase();
+  let result = "That's a good question! Our starter answer library doesn't know that one yet. We're working on expanding the answers.";
+
+  for (const item of answers) {
+    if (lower.includes(item[0])) {
+      result = item[1];
+      break;
+    }
+  }
+
+  document.getElementById("answerText").textContent = result;
+  document.getElementById("answer").style.display = "block";
+}
+
+document.getElementById("questionForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  ask(document.getElementById("question").value);
+});
+</script>
+
+</body>
+</html>
