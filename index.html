@@ -104,8 +104,8 @@
 
         answer.textContent = data.answer;
       } catch (error) {
-        answer.textContent =
-          "Sorry, I couldn't get an answer. Please try again.";
+  answer.textContent = "Error: " + error.message;
+      }
       } finally {
         button.disabled = false;
       }
